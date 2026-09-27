@@ -34,6 +34,25 @@
 
 ---
 
+## 🌐 GitHub 仓库（已上传，队友可直接访问）
+
+**https://github.com/linzhi42506-collab/llm-competition** （public）
+
+队友克隆：
+```bash
+git clone https://github.com/linzhi42506-collab/llm-competition.git
+```
+
+以后本目录有改动，推上去只要三条命令：
+```bash
+cd /home/robo/llm_comp
+git add -A && git commit -m "说明这次改了什么"
+git push
+```
+（remote 已配好，不在仓库里的用 `11_推送到GitHub.sh` 重新配置）
+
+---
+
 ## 一、30 秒上手
 
 ```bash
