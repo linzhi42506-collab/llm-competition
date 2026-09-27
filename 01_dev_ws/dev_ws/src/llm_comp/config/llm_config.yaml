@@ -1,0 +1,36 @@
+# ============================================================================
+#  大模型接入配置
+#  ---------------------------------------------------------------------------
+#  官方讲解明确提示：今年题目对本地小模型偏难，**建议使用云端 API**
+#  （DeepSeek / 智谱AI / 火山引擎等）。本地 llama-server 保留作为离线兜底。
+#
+#  切换方式：把 provider 改成下面的名字即可，代码无需改动：
+#     local | deepseek | zhipu | volcengine | dashscope | siliconflow | openai | custom
+#
+#  ⚠ API Key 不要写进本文件（提交源码会泄露）！
+#    请用环境变量：见 06_脚本/set_api_key.sh
+#      export DEEPSEEK_API_KEY=sk-xxxx
+# ============================================================================
+
+llm:
+  # ---- 当前使用哪个服务商 ------------------------------------------------
+  provider: local
+
+  # ---- 覆盖项（留空则用 provider 预设） -----------------------------------
+  base_url: ""      # 例: https://api.deepseek.com/v1
+  model: ""         # 例: deepseek-chat / glm-4-flash / doubao-pro-32k
+  api_key: ""       # 建议留空，改用环境变量
+
+  # ---- 推理参数 ----------------------------------------------------------
+  timeout: 30.0     # 云端建议 30s；本地小模型 60s
+  temperature: 0.1  # 任务解析要稳定，温度调低
+  max_tokens: 512
+
+# 各服务商预设（代码内置，此处仅供查阅）
+presets:
+  local:      {base_url: "http://127.0.0.1:8081/v1",              model: "qwen2.5-coder",        env: ""}
+  deepseek:   {base_url: "https://api.deepseek.com/v1",           model: "deepseek-chat",        env: DEEPSEEK_API_KEY}
+  zhipu:      {base_url: "https://open.bigmodel.cn/api/paas/v4",  model: "glm-4-flash",          env: ZHIPUAI_API_KEY}
+  volcengine: {base_url: "https://ark.cn-beijing.volces.com/api/v3", model: "doubao-pro-32k",    env: ARK_API_KEY}
+  dashscope:  {base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1", model: "qwen-plus", env: DASHSCOPE_API_KEY}
+  siliconflow: {base_url: "https://api.siliconflow.cn/v1",        model: "Qwen/Qwen2.5-7B-Instruct", env: SILICONFLOW_API_KEY}
